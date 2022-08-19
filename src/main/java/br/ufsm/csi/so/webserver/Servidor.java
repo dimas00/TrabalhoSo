@@ -93,8 +93,8 @@ public class Servidor {
                     else{
                         recurso= "paginaInicial.jsp";
                     }
-                   // File file = new File( ".."+ File.separator +  "resources" + File.separator + recurso);
-                    File file = new File( "src"+ File.separator + "main" + File.separator + "resources" + File.separator + recurso);
+                    File file = new File( ".."+ File.separator +  "resources" + File.separator + recurso);
+                    //File file = new File( "src"+ File.separator + "main" + File.separator + "resources" + File.separator + recurso);
                     if (file.exists() && file.isFile()) {
                         Path path = file.toPath();
                         String mimeType = Files.probeContentType(path);
@@ -128,8 +128,8 @@ public class Servidor {
         }
 
         public static String reservaPoltrona(int id, String nome) throws IOException {
-           // File logFile = new File(".." + File.separator + ".." + File.separator + "log" + File.separator + "log.txt");
-            File logFile = new File( "src"+ File.separator + "log" + File.separator +  "log.txt");
+            File logFile = new File(".." + File.separator + ".." + File.separator + "log" + File.separator + "log.txt");
+//            File logFile = new File( "src"+ File.separator + "log" + File.separator +  "log.txt");
             System.out.println(logFile.getAbsolutePath());
             String msg = "";
             for( Poltrona p : poltronas ){

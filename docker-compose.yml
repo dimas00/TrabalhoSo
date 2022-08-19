@@ -5,3 +5,7 @@ services:
         build: .
         ports:
           - 8080:8080
+        volumes:
+          - vl1:/TrabalhoSo/src/log/
+volumes:
+  vl1:
