@@ -116,6 +116,7 @@ public class Servidor {
                         fin.close();
                     } else {
                         System.out.println("recurso " + recurso + " nao encontrado.");
+                        System.out.println( file.getAbsolutePath());
                         out.write("HTTP/1.1 404 NOT FOUND\n\n".getBytes(StandardCharsets.UTF_8));
                     }
                 }
