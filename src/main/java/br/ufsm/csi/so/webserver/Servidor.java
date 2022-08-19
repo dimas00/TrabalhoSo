@@ -110,11 +110,12 @@ public class Servidor {
                             read = fin.read(buf_arquivo);
                             if (read > 0) {
                                 out.write(buf_arquivo, 0, read);
+                                System.out.println("recurso " + recurso + " encontrado.");
                             }
                         } while (read > 0);
                         fin.close();
                     } else {
-                        //System.out.println("recurso " + recurso + " nao encontrado.");
+                        System.out.println("recurso " + recurso + " nao encontrado.");
                         out.write("HTTP/1.1 404 NOT FOUND\n\n".getBytes(StandardCharsets.UTF_8));
                     }
                 }
