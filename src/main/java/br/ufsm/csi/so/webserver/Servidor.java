@@ -93,7 +93,8 @@ public class Servidor {
                     else{
                         recurso= "paginaInicial.jsp";
                     }
-                    File file = new File( ".."+ File.separator +  "resources" + File.separator + recurso);
+                   // File file = new File( ".."+ File.separator +  "resources" + File.separator + recurso);
+                    File file = new File( "src"+ File.separator + "main" + File.separator + "resources" + File.separator + recurso);
                     if (file.exists() && file.isFile()) {
                         Path path = file.toPath();
                         String mimeType = Files.probeContentType(path);
@@ -126,27 +127,45 @@ public class Servidor {
             }
         }
 
-        public static String reservaPoltrona(int id, String nome){
+        public static String reservaPoltrona(int id, String nome) throws IOException {
+           // File logFile = new File(".." + File.separator + ".." + File.separator + "log" + File.separator + "log.txt");
+            File logFile = new File( "src"+ File.separator + "log" + File.separator +  "log.txt");
+            System.out.println(logFile.getAbsolutePath());
+            String msg = "";
             for( Poltrona p : poltronas ){
                 if(p.getId() == id && p.isLivre() == true){
                     p.setNome(nome);
                     p.setLivre(false);
                     p.setDataHora(LocalDateTime.now());
                     poltronas.add(p);
+                    msg= "Poltrona: " + id + "- Nome da pessoa: " + nome + "- Data e hora da reserva: " + p.getDataHora();
                     System.out.println("Poltrona: "+id);
                     System.out.println("Nome da pessoa: "+nome);
                     System.out.println("Data e hora da reserva: "+p.getDataHora());
+                    FileWriter fw = new FileWriter(logFile, true);
+                    PrintWriter pw = new PrintWriter(fw);
+                    pw.println(msg);
+                    pw.close();
+
+
                     status= "Poltrona Reservada";
 
 
                     break;
                 }
                 if(p.getId() == id && p.isLivre() == false){
+                    msg= "Poltrona: " + id + "- Nome da pessoa: " + nome + "- Poltrona já Reservada: " ;
                     System.out.println("Poltrona: "+id);
                     System.out.println("Nome da pessoa: "+nome);
                     status= "Poltrona já Reservada";
+                    FileWriter fw = new FileWriter(logFile, true);
+                    PrintWriter pw = new PrintWriter(fw);
+                    pw.println(msg);
+                    pw.close();
                     break;
                 }
+
+
             }
         return status;
         }
